@@ -50,4 +50,8 @@ Thumbs.db
 .github/instructions/nx.instructions.md
 
 vite.config.*.timestamp*
-vitest.config.*.timestamp*.playwright-mcp/
+vitest.config.*.timestamp*
+
+# Playwright MCP screenshots
+.playwright-mcp/
+.playwright-mcp/*
