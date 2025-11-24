@@ -1,55 +1,35 @@
 import { useState, useEffect } from 'react';
-import { Link, getRouteApi } from '@tanstack/react-router';
-import {
-  getPostById,
-  getCommentsByPostId,
-  createComment,
-} from '../lib/db-service';
+import { Link, useParams, useLoaderData, useNavigate } from 'react-router';
+import { getCommentsByPostId, createComment } from '../lib/db-service';
 import { useAuth } from '../contexts/AuthContext';
-import { Comment, Post } from '../types';
+import { Comment } from '../types';
 import { Panel, Button, Input, Message, toaster } from 'rsuite';
 import ArrowLeftLineIcon from '@rsuite/icons/ArrowLeftLine';
 
-// Get route API for type-safe hooks
-const routeApi = getRouteApi('/posts/$id/comments');
-
 export function CommentsPage() {
-  const { id } = routeApi.useParams();
-  const navigate = routeApi.useNavigate();
-  const postId = Number(id);
+  const { id } = useParams();
+  const { post } = useLoaderData() as { post: any };
+  const navigate = useNavigate();
   const { isAuthenticated, user } = useAuth();
 
-  const [post, setPost] = useState<Post | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([getPostById(postId), getCommentsByPostId(postId)])
-      .then(([postData, commentsData]) => {
-        setPost(postData);
-        setComments(commentsData);
-        setLoading(false);
-      })
-      .catch(console.error);
-  }, [postId]);
+    if (post) {
+      getCommentsByPostId(post.id)
+        .then((commentsData) => {
+          setComments(commentsData);
+          setLoading(false);
+        })
+        .catch(console.error);
+    }
+  }, [post]);
 
   if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!post) {
-    return (
-      <Panel bordered className="text-center py-12 bg-white">
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">
-          Post not found
-        </h2>
-        <Button as={Link} to="/posts" appearance="primary" className="mt-4">
-          Back to Posts
-        </Button>
-      </Panel>
-    );
+    return <div>Loading comments...</div>;
   }
 
   const formatDate = (dateString: string) => {
@@ -73,7 +53,7 @@ export function CommentsPage() {
       return;
     }
 
-    if (!isAuthenticated || !user) {
+    if (!isAuthenticated || !user || !post) {
       toaster.push(
         <Message showIcon type="warning" closable>
           Please login to comment
@@ -85,7 +65,7 @@ export function CommentsPage() {
 
     setSubmitting(true);
     try {
-      const comment = await createComment(postId, user.id, newComment);
+      const comment = await createComment(post.id, user.id, newComment);
       setComments([comment, ...comments]);
       setNewComment('');
       toaster.push(
@@ -112,13 +92,7 @@ export function CommentsPage() {
       <Button
         appearance="ghost"
         startIcon={<ArrowLeftLineIcon />}
-        onClick={() =>
-          navigate({
-            to: '/posts/$id',
-            params: { id: String(postId) },
-            search: { page: 1 },
-          })
-        }
+        onClick={() => navigate(`/posts/${id}?page=1`)}
       >
         Back to Post
       </Button>
@@ -182,9 +156,9 @@ export function CommentsPage() {
             <p className="text-gray-600 mb-4">
               Please login to leave a comment
             </p>
-            <Button as={Link} to="/admin" appearance="primary">
-              Login
-            </Button>
+            <Link to="/admin">
+              <Button appearance="primary">Login</Button>
+            </Link>
           </div>
         )}
       </Panel>

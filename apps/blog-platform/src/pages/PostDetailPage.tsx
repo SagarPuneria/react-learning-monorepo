@@ -1,16 +1,13 @@
 import { useEffect, useState } from 'react';
-import { Link, getRouteApi } from '@tanstack/react-router';
+import { Link, useLoaderData, useNavigate } from 'react-router';
 import { incrementPostViews, getCommentsByPostId } from '../lib/db-service';
 import { Comment } from '../types';
 import { Panel, Breadcrumb, Button } from 'rsuite';
 import ArrowLeftLineIcon from '@rsuite/icons/ArrowLeftLine';
 
-// Get route API for type-safe hooks
-const routeApi = getRouteApi('/posts/$id');
-
 export function PostDetailPage() {
-  const { post } = routeApi.useLoaderData();
-  const navigate = routeApi.useNavigate();
+  const { post } = useLoaderData() as { post: any };
+  const navigate = useNavigate();
   const [comments, setComments] = useState<Comment[]>([]);
 
   if (!post) {
@@ -37,11 +34,11 @@ export function PostDetailPage() {
     <div className="max-w-4xl mx-auto space-y-6 px-4 md:px-0">
       {/* Breadcrumbs */}
       <Breadcrumb>
-        <Breadcrumb.Item as={Link} to="/">
-          Home
+        <Breadcrumb.Item>
+          <Link to="/">Home</Link>
         </Breadcrumb.Item>
-        <Breadcrumb.Item as={Link} to="/posts">
-          Posts
+        <Breadcrumb.Item>
+          <Link to="/posts">Posts</Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item active className="truncate max-w-xs md:max-w-none">
           {post.title}
@@ -52,7 +49,7 @@ export function PostDetailPage() {
       <Button
         appearance="ghost"
         startIcon={<ArrowLeftLineIcon />}
-        onClick={() => navigate({ to: '/posts', search: { page: 1 } })}
+        onClick={() => navigate('/posts?page=1')}
       >
         Back to Posts
       </Button>
@@ -246,11 +243,7 @@ export function PostDetailPage() {
           <h2 className="text-2xl font-bold text-gray-800">
             Comments ({comments.length})
           </h2>
-          <Link
-            to="/posts/$id/comments"
-            params={{ id: post.slug }}
-            search={{ page: 1 }}
-          >
+          <Link to={`/post-comments/${post.slug}?page=1`}>
             <Button appearance="primary">View All Comments</Button>
           </Link>
         </div>
@@ -316,11 +309,7 @@ export function PostDetailPage() {
             ))}
             {comments.length > 3 && (
               <div className="text-center">
-                <Link
-                  to="/posts/$id/comments"
-                  params={{ id: post.slug }}
-                  search={{ page: 1 }}
-                >
+                <Link to={`/post-comments/${post.slug}?page=1`}>
                   <Button appearance="link">
                     View {comments.length - 3} more comments
                   </Button>

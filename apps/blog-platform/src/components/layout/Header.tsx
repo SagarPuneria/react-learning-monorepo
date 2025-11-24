@@ -1,15 +1,15 @@
 import { Button } from 'rsuite';
-import { Link, useRouter } from '@tanstack/react-router';
+import { Link, useLocation } from 'react-router';
 import { useAuth } from '../../contexts/AuthContext';
 import { ThemeToggle } from '../ThemeToggle';
 
 export function Header() {
   const { isAuthenticated, user, logout } = useAuth();
-  const router = useRouter();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
-    router.navigate({ to: '/' });
+    window.location.href = '/';
   };
 
   return (

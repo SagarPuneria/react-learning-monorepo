@@ -8,7 +8,7 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">About TechBlog</h3>
             <p className="text-gray-300 text-sm">
-              A modern blogging platform built with React, TanStack Router, and
+              A modern blogging platform built with React, React Router v7, and
               Tailwind CSS. Showcasing the latest web development techniques and
               best practices.
             </p>
@@ -46,7 +46,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold mb-4">Technologies</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>• React 19</li>
-              <li>• TanStack Router</li>
+              <li>• React Router v7</li>
               <li>• Tailwind CSS</li>
               <li>• SQL.js Database</li>
             </ul>

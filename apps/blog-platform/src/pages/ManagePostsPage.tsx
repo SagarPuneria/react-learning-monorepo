@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from '@tanstack/react-router';
+import { useNavigate } from 'react-router';
 import {
   Panel,
   Button,
@@ -82,7 +82,8 @@ export function ManagePostsPage() {
   const refreshPosts = async () => {
     setLoading(true);
     try {
-      const result = await getAllPosts({ published: false });
+      // Fetch ALL posts for admin management (both published and draft)
+      const result = await getAllPosts({});
       setPosts(result.data);
     } catch (error) {
       console.error('Error fetching posts:', error);
@@ -274,11 +275,7 @@ export function ManagePostsPage() {
             height={600}
             data={posts}
             onRowClick={(rowData) => {
-              navigate({
-                to: '/posts/$id',
-                params: { id: rowData.slug },
-                search: { page: 1 },
-              });
+              navigate(`/posts/${rowData.slug}?page=1`);
             }}
           >
             <Column width={300} flexGrow={1}>

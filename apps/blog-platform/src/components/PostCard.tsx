@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link } from 'react-router';
 import { Button } from 'rsuite';
 import { Post } from '../types';
 
@@ -66,7 +66,7 @@ export function PostCard({ post }: PostCardProps) {
             )}
           </div>
 
-          <Link to="/posts/$id" params={{ id: post.slug }} search={{ page: 1 }}>
+          <Link to={`/posts/${post.slug}?page=1`}>
             <h3 className="text-xl font-bold text-gray-800 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer leading-tight">
               {post.title}
             </h3>

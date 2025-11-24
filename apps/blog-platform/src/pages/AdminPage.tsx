@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Link } from '@tanstack/react-router';
+import { useNavigate, Link } from 'react-router';
 import { useAuth } from '../contexts/AuthContext';
 import { getAllPosts } from '../lib/db-service';
 import { Post } from '../types';

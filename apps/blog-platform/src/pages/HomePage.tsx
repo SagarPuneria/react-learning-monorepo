@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Panel, Button, Loader, Stack, VStack, HStack } from 'rsuite';
-import { getRouteApi } from '@tanstack/react-router';
+import { useNavigate } from 'react-router';
 import { getAllPosts } from '../lib/db-service';
 import { Post } from '../types';
 import { PostCard } from '../components/PostCard';
 
-// Get route API for type-safe navigation
-const routeApi = getRouteApi('/');
-
 export function HomePage() {
-  const navigate = routeApi.useNavigate();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [featuredPosts, setFeaturedPosts] = useState<Post[]>([]);
   const [recentPosts, setRecentPosts] = useState<Post[]>([]);
@@ -53,7 +50,7 @@ export function HomePage() {
           </p>
           <div className="flex gap-4 justify-center">
             <Button
-              onClick={() => navigate({ to: '/posts', search: { page: 1 } })}
+              onClick={() => navigate('/posts?page=1')}
               size="lg"
               appearance="primary"
               className="bg-white! text-gray-900! hover:bg-gray-50!"
@@ -61,7 +58,7 @@ export function HomePage() {
               Browse All Posts
             </Button>
             <Button
-              onClick={() => navigate({ to: '/about' })}
+              onClick={() => navigate('/about')}
               size="lg"
               appearance="ghost"
               className="text-white! border-white! hover:bg-white/20!"
@@ -102,10 +99,7 @@ export function HomePage() {
               </h2>
               <p className="text-gray-600">Latest articles from our blog</p>
             </VStack>
-            <Button
-              onClick={() => navigate({ to: '/posts', search: { page: 1 } })}
-              appearance="link"
-            >
+            <Button onClick={() => navigate('/posts?page=1')} appearance="link">
               View All Posts
               <svg
                 className="w-4 h-4 inline-block ml-1"

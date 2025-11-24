@@ -8,30 +8,34 @@ import {
   Button,
 } from 'rsuite';
 import SearchIcon from '@rsuite/icons/Search';
-import { getRouteApi } from '@tanstack/react-router';
+import { useNavigate, useSearchParams, useLoaderData } from 'react-router';
 import { getAllPosts, getAllTags } from '../lib/db-service';
 import { Post, PostsSearchParams } from '../types';
 import { PostCard } from '../components/PostCard';
 
 const { Paragraph } = Placeholder;
 
-// Get route API for type-safe hooks
-const routeApi = getRouteApi('/posts');
-
 export function PostsPage() {
-  const navigate = routeApi.useNavigate();
-  const searchParams = routeApi.useSearch() as PostsSearchParams;
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const loaderData = useLoaderData() as {
+    page: number;
+    search: string;
+    tag: string;
+  };
 
   const [loading, setLoading] = useState(true);
   const [posts, setPosts] = useState<Post[]>([]);
   const [total, setTotal] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [searchQuery, setSearchQuery] = useState(searchParams.search || '');
+  const [searchQuery, setSearchQuery] = useState(
+    searchParams.get('search') || ''
+  );
   const [allTags, setAllTags] = useState<string[]>([]);
 
-  const currentPage = searchParams.page || 1;
-  const selectedTag = searchParams.tag || '';
-  const searchText = searchParams.search || '';
+  const currentPage = parseInt(searchParams.get('page') || '1');
+  const selectedTag = searchParams.get('tag') || '';
+  const searchText = searchParams.get('search') || '';
   const limit = 6;
 
   useEffect(() => {
@@ -60,45 +64,34 @@ export function PostsPage() {
   }, [currentPage, searchText, selectedTag]);
 
   const handlePageChange = (page: number) => {
-    navigate({
-      to: '/posts',
-      search: {
-        page,
-        search: searchText || undefined,
-        tag: selectedTag || undefined,
-      },
-    });
+    const params = new URLSearchParams();
+    params.set('page', page.toString());
+    if (searchText) params.set('search', searchText);
+    if (selectedTag) params.set('tag', selectedTag);
+    navigate(`/posts?${params.toString()}`);
   };
 
   const handleSearch = (value: string) => {
     setSearchQuery(value);
-    navigate({
-      to: '/posts',
-      search: {
-        page: 1,
-        search: value || undefined,
-        tag: selectedTag || undefined,
-      },
-    });
+    const params = new URLSearchParams();
+    params.set('page', '1');
+    if (value) params.set('search', value);
+    if (selectedTag) params.set('tag', selectedTag);
+    navigate(`/posts?${params.toString()}`);
   };
 
   const handleTagClick = (tag: string) => {
-    navigate({
-      to: '/posts',
-      search: {
-        page: 1,
-        search: searchText || undefined,
-        tag: tag === selectedTag ? undefined : tag,
-      },
-    });
+    const params = new URLSearchParams();
+    params.set('page', '1');
+    if (searchText) params.set('search', searchText);
+    const newTag = tag === selectedTag ? undefined : tag;
+    if (newTag) params.set('tag', newTag);
+    navigate(`/posts?${params.toString()}`);
   };
 
   const clearFilters = () => {
     setSearchQuery('');
-    navigate({
-      to: '/posts',
-      search: { page: 1 },
-    });
+    navigate('/posts?page=1');
   };
 
   return (

@@ -36,7 +36,7 @@ export function AboutPage() {
             <ul className="space-y-2 text-gray-600">
               <li>✓ React 19 - Latest React features</li>
               <li>✓ TypeScript 5.9 - Type-safe development</li>
-              <li>✓ TanStack Router - Type-safe routing</li>
+              <li>✓ React Router v7 - Declarative routing</li>
               <li>✓ RSuite - React UI component library</li>
               <li>✓ Tailwind CSS 4 - Utility-first styling</li>
               <li>✓ Vite 7 - Lightning-fast development</li>
