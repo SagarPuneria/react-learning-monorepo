@@ -8,10 +8,9 @@ export const Route = createFileRoute('/admin')({
 function AdminLayoutComponent() {
   const matches = useMatches();
 
-  // If only the /admin route is matched (no child routes), show AdminPage
-  // Otherwise, render child routes via Outlet
-  const isAdminIndex =
-    matches.length === 2 && matches[matches.length - 1]?.id === '/admin';
+  // Check if we're at /admin (index) or a child route like /admin/posts
+  const currentMatch = matches[matches.length - 1];
+  const isAdminIndex = currentMatch?.routeId === '/admin';
 
   if (isAdminIndex) {
     return <AdminPage />;
