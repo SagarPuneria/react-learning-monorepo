@@ -9,6 +9,7 @@ A comprehensive **React learning monorepo** built with **Nx** featuring multiple
 This monorepo contains 5 React applications, each showcasing different concepts and technologies:
 
 ### 📝 Blog Platform (Port 4203)
+
 **A feature-rich blogging platform with React Router v7**
 
 - ✅ **React Router v7** - Declarative routing with loaders and error boundaries
@@ -24,6 +25,7 @@ npx nx serve blog-platform    # http://localhost:4203
 ```
 
 ### ✅ Task Tracker (Port 4201)
+
 **A modern task management application**
 
 - ✅ **React 19** - Latest React features with React Compiler optimizations
@@ -39,6 +41,7 @@ npx nx serve task-tracker     # http://localhost:4201
 ```
 
 ### 📋 Feedback Form (Port 4202)
+
 **A comprehensive multi-step feedback form application**
 
 - ✅ **Multi-step Form** - Progressive form with validation at each step
@@ -54,6 +57,7 @@ npx nx serve feedback-form    # http://localhost:4202
 ```
 
 ### 🛍️ Product Catalog (Port 4204)
+
 **Product catalog application (Ready for development)**
 
 - 🔨 **Nx Generated Template** - Base setup ready for feature development
@@ -66,6 +70,7 @@ npx nx serve product-catalog  # http://localhost:4204
 ```
 
 ### 🛒 E-commerce Platform (Port 4205)
+
 **E-commerce platform application (Ready for development)**
 
 - 🔨 **Nx Generated Template** - Base setup ready for feature development
