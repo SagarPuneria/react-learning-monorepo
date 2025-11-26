@@ -72,9 +72,6 @@ A feature-rich blog platform demonstrating **TanStack Router**, **RSuite UI comp
 # Install dependencies (from monorepo root)
 npm install
 
-# Navigate to blog-platform
-cd apps/blog-platform
-
 # Start development server
 npx nx serve blog-platform
 ```
