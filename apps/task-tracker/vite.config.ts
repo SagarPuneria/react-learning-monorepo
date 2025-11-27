@@ -26,7 +26,7 @@ export default defineConfig(() => ({
   resolve: {
     alias: {
       '@task-tracker': path.resolve(__dirname, './src'),
-      // '@libs': path.resolve(__dirname, '../../libs'), // ❌
+      // '@libs': path.resolve(__dirname, '../../libs'),
       // Map each library to its source directory ✅
       '@libs/utils': path.resolve(__dirname, '../../libs/utils/src'), // ✅
       '@libs/hooks': path.resolve(__dirname, '../../libs/hooks/src'), // ✅
@@ -34,10 +34,6 @@ export default defineConfig(() => ({
       '@libs/types': path.resolve(__dirname, '../../libs/types/src'), // ✅
     },
   },
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [],
-  // },
   build: {
     outDir: './dist',
     emptyOutDir: true,

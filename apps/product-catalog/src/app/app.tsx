@@ -1,31 +1,12 @@
-// Uncomment this line to use CSS modules
-// import styles from './app.module.css';
-import NxWelcome from './nx-welcome';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import { ProductCatalogApp } from './ProductCatalogApp';
 
 export function App() {
   return (
-    <div>
-      <NxWelcome title="@react-learning-monorepo/product-catalog" />
-
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
-      <br />
-      <hr />
-      <br />
-      <div role="navigation">
-        <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <p>This is the product-catalog application.</p>
-        <p>Build your product catalog features here.</p>
-      </div>
-      {/* END: routes */}
-    </div>
+    <Provider store={store}>
+      <ProductCatalogApp />
+    </Provider>
   );
 }
 

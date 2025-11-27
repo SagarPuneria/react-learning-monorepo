@@ -48,8 +48,10 @@ export function AboutPage() {
               Backend
             </h3>
             <ul className="space-y-2 text-gray-600">
-              <li>✓ SQL.js - In-browser SQLite database</li>
-              <li>✓ LocalStorage - Data persistence</li>
+              <li>✓ Supabase - Backend as a Service</li>
+              <li>✓ PostgreSQL - Cloud database</li>
+              <li>✓ Supabase Auth - User authentication</li>
+              <li>✓ Real-time subscriptions - Live updates</li>
               <li>✓ TypeScript services - Type-safe data layer</li>
             </ul>
           </div>
@@ -204,11 +206,11 @@ export function AboutPage() {
             <span className="text-2xl">🗂️</span>
             <div>
               <h4 className="font-semibold text-gray-800 mb-1">
-                SQLite Database
+                Supabase Backend
               </h4>
               <p className="text-gray-600">
-                Full relational database running entirely in the browser with
-                persistence
+                Cloud PostgreSQL database with authentication and real-time
+                capabilities
               </p>
             </div>
           </div>
@@ -227,12 +229,12 @@ export function AboutPage() {
             password)
           </p>
           <p>
-            <strong>Database:</strong> Stored in browser's LocalStorage (data
-            persists across sessions)
+            <strong>Database:</strong> Powered by Supabase PostgreSQL with
+            real-time capabilities
           </p>
           <p>
-            <strong>Sample Data:</strong> Includes 6 posts, 3 users, and
-            multiple comments for testing
+            <strong>Sample Data:</strong> Includes multiple posts, users, and
+            comments for testing
           </p>
         </div>
       </Panel>

@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 
 export default defineConfig(() => ({
   root: __dirname,
@@ -22,10 +23,14 @@ export default defineConfig(() => ({
       },
     }),
   ],
-  // Uncomment this if you are using workers.
-  // worker: {
-  //  plugins: [],
-  // },
+  resolve: {
+    alias: {
+      '@react-learning-monorepo/utils': path.resolve(__dirname, '../../libs/utils/src/index.ts'),
+      '@react-learning-monorepo/types': path.resolve(__dirname, '../../libs/types/src/index.ts'),
+      '@react-learning-monorepo/hooks': path.resolve(__dirname, '../../libs/hooks/src/index.ts'),
+      '@react-learning-monorepo/ui-components': path.resolve(__dirname, '../../libs/ui-components/src/index.ts'),
+    },
+  },
   build: {
     outDir: './dist',
     emptyOutDir: true,
@@ -33,5 +38,8 @@ export default defineConfig(() => ({
     commonjsOptions: {
       transformMixedEsModules: true,
     },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-redux', '@reduxjs/toolkit'],
   },
 }));
