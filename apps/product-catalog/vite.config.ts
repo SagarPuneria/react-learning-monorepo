@@ -25,6 +25,7 @@ export default defineConfig(() => ({
   ],
   resolve: {
     alias: {
+      // Resolve alias configuration and map each library to its source directory, similar to what we did for task-tracker
       '@react-learning-monorepo/utils': path.resolve(__dirname, '../../libs/utils/src/index.ts'),
       '@react-learning-monorepo/types': path.resolve(__dirname, '../../libs/types/src/index.ts'),
       '@react-learning-monorepo/hooks': path.resolve(__dirname, '../../libs/hooks/src/index.ts'),
