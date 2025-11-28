@@ -79,6 +79,55 @@ resolve: {
 }
 ```
 
+## Build Configuration
+
+### Creating Distribution Folders
+
+Each app is configured with Vite build settings to create a `dist` folder:
+
+```typescript
+build: {
+  outDir: './dist',
+  emptyOutDir: true,
+  reportCompressedSize: true,
+  commonjsOptions: {
+    transformMixedEsModules: true,
+  },
+}
+```
+
+### Build Commands
+
+**Build specific app:**
+```bash
+npx nx build task-tracker
+npx nx build product-catalog
+npx nx build ecommerce-platform
+# etc.
+```
+
+**Build all apps:**
+```bash
+npx nx run-many -t build
+```
+
+**Build with dependencies:**
+```bash
+npx nx build task-tracker --with-deps
+```
+
+### Build Output
+
+Successful builds create:
+- `apps/[app-name]/dist/index.html` - Main HTML file
+- `apps/[app-name]/dist/assets/` - Bundled CSS and JS files
+- `apps/[app-name]/dist/favicon.ico` - App icon
+
+Example task-tracker build output:
+- `dist/index.html` (0.63 kB)
+- `dist/assets/index-wdkN41Z0.css` (739.64 kB)
+- `dist/assets/index-AaZwg80Z.js` (432.54 kB)
+
 ## Troubleshooting
 
 ### Node.js Version Warning
