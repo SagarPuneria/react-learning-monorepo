@@ -4,6 +4,21 @@
 
 A comprehensive **React learning monorepo** built with **Nx** featuring multiple applications demonstrating modern React development patterns, state management, routing, and UI component libraries.
 
+## ⚛️ React vs Angular — My Understanding
+
+| | **React** | **Angular** |
+|---|---|---|
+| **Type** | Library | Full-fledged Framework |
+| **Language** | JavaScript (TypeScript optional) | TypeScript (mandatory) |
+| **Learning Curve** | Easier to start | Steeper (JS + TS + framework concepts) |
+| **Third-party libs** | You add as project grows | Mostly pre-bundled from day one |
+| **Flexibility** | Very flexible, no strict rules | Strict conventions enforced |
+
+**Key takeaways:**
+
+- **React's ecosystem** (Redux, React Router, Axios, etc.) means you cherry-pick what you need, but that also means more decisions to make.
+- **Angular's opinionated** nature is actually an advantage in large teams — everyone writes code the same way, making maintenance easier.
+
 ## 🚀 Applications Overview
 
 This monorepo contains 5 React applications, each showcasing different concepts and technologies:
